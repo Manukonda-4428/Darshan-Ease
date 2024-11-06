@@ -29,148 +29,23 @@ function App() {
       <Toaster position="top-center" reverseOrder={false} />
       <Spinner />
       <Routes>
-        {/***** PROTECTED ROUTES *******/}
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Homepage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/apply-pandith"
-          element={
-            <ProtectedRoute>
-              <ApplyPandith />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/users"
-          element={
-            <ProtectedRoute>
-              <Users />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/pandiths"
-          element={
-            <ProtectedRoute>
-              <Pandiths />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/notifications"
-          element={
-            <ProtectedRoute>
-              <Notification />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/pandith/profile/:id"
-          element={
-            <ProtectedRoute>
-              <PandithProfile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/pandith/poojas"
-          element={
-            <ProtectedRoute>
-              <PandithPoojas />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/pandith/book-pooja/:pandithId"
-          element={
-            <ProtectedRoute>
-              <BookingPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/poojas"
-          element={
-            <ProtectedRoute>
-              <Poojas />
-            </ProtectedRoute>
-          }
-        />
-
-       <Route
-          path="/donation"
-          element={
-            <ProtectedRoute>
-              <DonationForm />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <UserProfile />
-            </ProtectedRoute>
-          }
-        />
-          <Route
-          path="/about"
-          element={
-            <ProtectedRoute>
-              <AboutPage />
-            </ProtectedRoute>
-          }
-        />
-
-      <Route
-          path="/map"
-          element={
-            <ProtectedRoute>
-              <Map />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-        path="/main"
-        element={
-          <ProtectedRoute>
-            <Main />
-          </ProtectedRoute>
-        }
-      />
-
-    <Route
-        path="/dharshan"
-        element={
-          <ProtectedRoute>
-            <DharshanPage />
-          </ProtectedRoute>
-        }
-      />
-        {/******* PUBLIC ROUTES ******/}
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <LoginPage />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <RegisterPage />
-            </PublicRoute>
-          }
-        />
+        <Route path="/" element={<ProtectedRoute><Homepage /></ProtectedRoute>} />
+        <Route path="/apply-pandith" element={<ProtectedRoute><ApplyPandith /></ProtectedRoute>} />
+        <Route path="/admin/users" element={<ProtectedRoute><Users /></ProtectedRoute>} />
+        <Route path="/admin/pandiths" element={<ProtectedRoute><Pandiths /></ProtectedRoute>} />
+        <Route path="/notifications" element={<ProtectedRoute><Notification /></ProtectedRoute>} />
+        <Route path="/pandith/profile/:id" element={<ProtectedRoute><PandithProfile /></ProtectedRoute>} />
+        <Route path="/pandith/poojas" element={<ProtectedRoute><PandithPoojas /></ProtectedRoute>} />
+        <Route path="/pandith/book-pooja/:pandithId" element={<ProtectedRoute><BookingPage /></ProtectedRoute>} />
+        <Route path="/poojas" element={<ProtectedRoute><Poojas /></ProtectedRoute>} />
+        <Route path="/donation" element={<ProtectedRoute><DonationForm /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+        <Route path="/about" element={<ProtectedRoute><AboutPage /></ProtectedRoute>} />
+        <Route path="/map" element={<ProtectedRoute><Map /></ProtectedRoute>} />
+        <Route path="/main" element={<ProtectedRoute><Main /></ProtectedRoute>} />
+        <Route path="/dharshan" element={<ProtectedRoute><DharshanPage /></ProtectedRoute>} />
+        <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
+        <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>

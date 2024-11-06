@@ -38,29 +38,14 @@ const Poojas = () => {
       ),
     },
     {
-      title: "Department",
-      dataIndex: "department",
-      render: (text, record) => <span>{record.pandithInfo.department}</span>,
-    },
-    {
-      title: "Experience",
-      dataIndex: "experience",
-      render: (text, record) => <span>{record.pandithInfo.experience}</span>,
-    },
-    {
-      title: "Phone",
-      dataIndex: "phone",
-      render: (text, record) => <span>{record.pandithInfo.phoneNumber}</span>,
-    },
-    {
-      title: "Date & Time",
+      title: "Date",
       dataIndex: "date",
-      render: (text, record) => (
-        <span>
-          {moment(record.date).format("DD-MM-YYYY")} &nbsp;
-          {moment(record.time).format("HH:mm")}
-        </span>
-      ),
+      render: (date) => moment(date).format("DD-MM-YYYY"),
+    },
+    {
+      title: "Time",
+      dataIndex: "time",
+      render: (time) => moment(time).format("HH:mm"),
     },
     {
       title: "Status",
@@ -70,16 +55,7 @@ const Poojas = () => {
 
   return (
     <Layout>
-      <div className="table-responsive">
-        <h1 className="m-4 text-center">Poojas List</h1>
-        <Table
-          className="mt-3"
-          columns={columns}
-          dataSource={poojas}
-          rowKey={(record) => record._id}
-          scroll={{ x: "max-content" }}
-        />
-      </div>
+      <Table columns={columns} dataSource={poojas} rowKey="_id" />
     </Layout>
   );
 };

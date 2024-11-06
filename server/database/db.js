@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
 
 const connectDB = async () => {
-  await mongoose.connect(process.env.MONGO_URL);
-
-  console.log(
-    `Connected to MongoDb Database ${mongoose.connection.host}.`.bgBrightGreen
-      .black
-  );
-
   try {
+    await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log(
+      `Connected to MongoDB Database ${mongoose.connection.host}.`.bgBrightGreen.black
+    );
   } catch (err) {
-    console.log(`MongoDb Database Error ${err}.`.bgBrightRed.white);
+    console.log(`MongoDB Database Error ${err}.`.bgBrightRed.white);
     process.exit(1);
   }
 };

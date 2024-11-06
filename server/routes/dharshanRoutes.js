@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Dharshan = require('../models/Dharshan');
+const { getDonations } = require('../controllers/donationController');
 
 // GET route for fetching Dharshan data
 router.get('/dharshan', async (req, res) => {
@@ -12,15 +13,7 @@ router.get('/dharshan', async (req, res) => {
     }
 });
 
-// POST route for creating a new Dharshan
-router.get('/donations', async (req, res) => {
-    try {
-      const donations = await Donation.find(); // Query your MongoDB collection
-      res.status(200).json(donations); // Respond with JSON data
-    } catch (err) {
-      console.error('Error fetching donations:', err);
-      res.status(500).json({ message: 'Failed to fetch donations' });
-    }
-  });
+// GET route for fetching donations
+router.get('/donations', getDonations);
 
 module.exports = router;

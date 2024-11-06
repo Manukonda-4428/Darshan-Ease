@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../../redux/spinnerSlice";
 import { getPandithPoojas, updatePoojaStatus } from "../../api/api";
 import moment from "moment";
-import { Table } from "antd";
+import { Table, Button } from "antd"; // Add Button here
 import toast from "react-hot-toast";
 
 const PandithPoojas = () => {
@@ -28,47 +28,36 @@ const PandithPoojas = () => {
   useEffect(() => {
     fetchPandithPoojas();
   }, []);
-  
 
   // Handle Pooja Booking Status
-  const handleStatus = async (record, status) => {
+  const handlePoojaStatus = async (record, status) => {
     try {
-      const poojasId = record._id;
-      const data = { poojasId, status };
       dispatch(showLoading());
-      const response = await updatePoojaStatus(data);
-      if (response.success) {
-        toast.success(response.message);
-        fetchPandithPoojas();
-      }
-      dispatch(hideLoading());
+      const res = await updatePoojaStatus({ poojasId: record._id, status });
+      toast.success(res.message);
+      fetchPandithPoojas();
     } catch (err) {
       dispatch(hideLoading());
-      toast.error(err.response.data.message);
+      toast.error("Failed to update pooja status. Please try again later.");
     }
   };
 
-  // Antd table columns
+  // Columns for the table
   const columns = [
     {
       title: "User Name",
-      dataIndex: "name",
-      render: (text, record) => <span>{record.userInfo.name}</span>,
+      dataIndex: "userInfo",
+      render: (text, record) => `${record.userInfo.firstName} ${record.userInfo.lastName}`,
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      render: (text, record) => <span>{record.userInfo.email}</span>,
-    },
-    {
-      title: "Date & Time",
+      title: "Date",
       dataIndex: "date",
-      render: (text, record) => (
-        <span>
-          {moment(record.date).format("DD-MM-YYYY")} &nbsp;
-          {moment(record.time).format("HH:mm")}
-        </span>
-      ),
+      render: (text) => moment(text).format("DD-MM-YYYY"),
+    },
+    {
+      title: "Time",
+      dataIndex: "time",
+      render: (text) => moment(text).format("HH:mm"),
     },
     {
       title: "Status",
@@ -79,38 +68,26 @@ const PandithPoojas = () => {
       dataIndex: "actions",
       render: (text, record) => (
         <div className="d-flex">
-        {record.status === "pending" && (
-          <div className="d-flex">
-            <button
-              className="btn btn-success mx-2"
-              onClick={() => handleStatus(record, "approved")}
-            >
-              Approved
-            </button>
-            <button
-              className="btn btn-danger"
-              onClick={() => handleStatus(record, "rejected")}
-            >
-              Reject
-            </button>
-          </div>
-        )}
-      </div>
-    ),
-  },
-];
+          <Button
+            type="primary"
+            onClick={() => handlePoojaStatus(record, "approved")}
+          >
+            Approve
+          </Button>
+          <Button
+            type="danger"
+            onClick={() => handlePoojaStatus(record, "rejected")}
+          >
+            Reject
+          </Button>
+        </div>
+      ),
+    },
+  ];
 
   return (
     <Layout>
-      <div className="table-responsive">
-        <h1 className="m-4 text-center">Pooja Bookings List</h1>
-        <Table
-          columns={columns}
-          dataSource={poojas}
-          rowKey={(record) => record._id}
-          scroll={{ x: "max-content" }}
-        />
-      </div>
+      <Table dataSource={poojas} columns={columns} />
     </Layout>
   );
 };

@@ -13,9 +13,7 @@ const RegisterPage = () => {
 
   // Form submit (Register)
   const onFinish = async (values) => {
-    const name = values.name;
-    const email = values.email;
-    const password = values.password;
+    const { name, email, password } = values;
 
     const data = { name, email, password };
     try {
@@ -47,64 +45,39 @@ const RegisterPage = () => {
       <div id="rays">
         <div className="form">
           <h2 id="login-lable">Register Form</h2>
-          <Form
-            name="register-form"
-            onFinish={onFinish}
-            layout="vertical"
-            className="register-form"
-          >
+          <Form name="register-form" onFinish={onFinish} layout="vertical">
             <Form.Item
               label="Name"
               name="name"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your name!",
-                },
-              ]}
+              rules={[{ required: true, message: "Please input your name!" }]}
             >
-              <Input />
+              <Input className="form-content" />
             </Form.Item>
 
             <Form.Item
               label="Email"
               name="email"
               rules={[
-                {
-                  type: "email",
-                  message: "Please enter a valid email!",
-                },
-                {
-                  required: true,
-                  message: "Please input your email!",
-                },
+                { type: "email", message: "Please enter a valid email!" },
+                { required: true, message: "Please input your email!" },
               ]}
             >
-              <Input />
+              <Input className="form-content" />
             </Form.Item>
 
             <Form.Item
               label="Password"
               name="password"
               rules={[
-                {
-                  required: true,
-                  message: "Please input your password!",
-                },
-                {
-                  validator: validatePassword,
-                },
+                { required: true, message: "Please input your password!" },
+                { validator: validatePassword },
               ]}
             >
-              <Input.Password />
+              <Input.Password className="form-content" />
             </Form.Item>
 
             <Form.Item>
-              <Button
-                className="w-100 btn-primary"
-                type="primary"
-                htmlType="submit"
-              >
+              <Button className="w-100 btn-primary" type="primary" htmlType="submit">
                 Register
               </Button>
             </Form.Item>

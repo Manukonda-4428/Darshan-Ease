@@ -1,29 +1,29 @@
-/* Global Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root {
+  --primary-color: #FFA500;
+  --secondary-color: #333;
+  --background-color: #f0f0f0;
+  --text-color: #fff;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Body Styles */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f2f2f2;
+  font-family: var(--font-family);
+  background-color: var(--background-color);
   line-height: 1.6;
-  color: #444;
+  color: var(--secondary-color);
 }
 
 .DesignHolder {
-  width: 100%; /* Ensures it covers full width */
-  max-width:100%; /* Limits maximum width */
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px;
 }
+
 .Center {
   text-align: center;
 }
 
-/* Header Styles */
 .site-logo {
   margin: 20px 0;
   text-align: center;
@@ -31,162 +31,118 @@ body {
 
 .site-logo h1 {
   font-size: 36px;
-  color: #007bff;
+  color: var(--primary-color);
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-/* Banner Styles */
 .Banner_sec {
-  background: linear-gradient(rgba(0, 123, 255, 0.9), rgba(0, 123, 255, 0.5)), url('https://imgs.search.brave.com/SFIWL2DogymlPRnv4np2mPB0Ky4-YhfHF1cUEW47_eQ/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAxLzY2LzQ3LzQz/LzM2MF9GXzE2NjQ3/NDMzMF9xZnYyZ21r/TUVSbEFVdHEzSTk4/a2N4d2IwMlNzd2VQ/Yy5qcGc') center/cover no-repeat;
-  color: #fff;
-  padding: 100px 0;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f8f8;
+}
+
+.Banner_sec .leftside {
+  flex: 1;
+  text-align: left;
 }
 
 .Banner_sec h3 {
-  font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 0;
+}
+
+.Banner_sec .leftside p {
+  margin: 5px 0;
+}
+
+.Banner_sec .rightside {
+  flex: 1;
+}
+
+.Banner_sec h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 2.5rem;
+  line-height: 1.2;
 }
 
 .Banner_sec p {
-  font-size: 24px;
-  margin-bottom: 40px;
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.6;
+  margin-top: 0;
 }
 
-.Banner_sec .more-details-btn {
-  display: inline-block;
-  padding: 15px 30px;
-  background: #007bff;
-  color: #fff;
-  text-decoration: none;
-  font-size: 18px;
-  border-radius: 5px;
-  transition: background 0.3s ease;
-}
-
-.Banner_sec .more-details-btn:hover {
-  background: #0056b3;
-}
-
-/* Slider Styles */
-#slider {
-  list-style: none;
-  padding: 0;
-  margin-top: 40px;
-  overflow: hidden;
-}
-
-#slider li {
-  float: left;
-  margin-right: 20px;
-}
-
-.Slider figure {
-  position: relative;
-  overflow: hidden;
-}
-
-.Slider img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.Slider img:hover {
-  transform: scale(1.05);
-}
-
-.Slider .text {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
-}
-
-/* About Section Styles */
 .About_sec {
-  background: #fff;
+  background: var(--background-color);
   padding: 60px 20px;
   margin-top: 40px;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 40px auto;
 }
 
-.About_sec h2 {
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 30px;
-  text-align: center;
-  color: #007bff;
+.TabImage {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.Line {
-  width: 100px;
-  height: 3px;
-  background: #007bff;
-  margin: 0 auto 30px;
+.about-img {
+  flex: 1;
+  max-width: 300px;
+  margin: 0 10px;
 }
 
-.Tabside {
-  text-align: left;
+.about-img img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
 }
 
-ul {
-  list-style: none;
+.about-img img:hover {
+  transform: scale(1.05);
+}
+
+.Tabside ul {
+  list-style-type: none;
   padding: 0;
+  display: flex;
+  justify-content: space-around;
+  color: var(--primary-color);
 }
 
-ul li {
-  display: inline-block;
-  margin-right: 20px;
-}
-
-.tabLink {
-  color: #007bff;
+.Tabside .tabLink {
   text-decoration: none;
-  font-size: 18px;
-  transition: color 0.3s ease;
+  padding: 10px 20px;
+  color: tomato;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.tabLink:hover {
-  color: #0056b3;
+.Tabside .tabLink.activeLink {
+  background: #f0f0f0;
+  border-color: var(--primary-color);
 }
 
-.tabLink.activeLink {
-  color: #000;
-  font-weight: bold;
-}
-
-.tabcontent {
+.Description {
   margin-top: 20px;
 }
 
 .Description h3 {
-  font-size: 24px;
-  font-weight: bold;
   margin-bottom: 10px;
 }
 
-.Description p {
-  font-size: 16px;
-  line-height: 1.8;
-  color: #666;
+.Line {
+  width: 50px;
+  height: 5px;
+  background: var(--primary-color);
+  margin: 20px auto;
 }
 
-/* Gallery Section Styles */
 .Services_sec {
-  background: #f2f2f2;
+  background: var(--background-color);
   padding: 60px 20px;
   margin-top: 40px;
   border-radius: 10px;
@@ -198,28 +154,30 @@ ul li {
   font-weight: bold;
   margin-bottom: 30px;
   text-align: center;
-  color: #007bff;
+  color: black;
 }
 
 .image-container {
+  display: flex;
+  flex-direction: row;
   overflow-x: auto;
-  white-space: nowrap;
   padding: 20px 0;
+  scroll-snap-type: x mandatory;
 }
 
 .image {
-  display: inline-block;
+  flex: 0 0 auto;
   width: 300px;
   height: 200px;
   margin-right: 20px;
-  border-radius: 10px;
-  overflow: hidden;
+  scroll-snap-align: start;
 }
 
 .image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 10px;
   transition: transform 0.3s ease;
 }
 
@@ -227,9 +185,8 @@ ul li {
   transform: scale(1.1);
 }
 
-/* Donation Section Styles */
 .Pricing_sec {
-  background: #fff;
+  background: var(--background-color);
   padding: 60px 20px;
   margin-top: 40px;
   border-radius: 10px;
@@ -241,20 +198,20 @@ ul li {
   font-weight: bold;
   margin-bottom: 30px;
   text-align: center;
-  color: #007bff;
+  color: var(--primary-color);
 }
 
 .Pricing_sec p {
   font-size: 18px;
   line-height: 1.8;
   margin-bottom: 20px;
-  color: #666;
+  color: var(--primary-color);
 }
 
 .Pricing_sec .Line {
   width: 100px;
   height: 3px;
-  background: #007bff;
+  background: var(--primary-color);
   margin: 0 auto 30px;
 }
 
@@ -282,7 +239,7 @@ ul li {
 
 .Pricing_sec .submit_btn {
   background-color: #007bff;
-  color: #fff;
+  color: var(--text-color);
   border: none;
   padding: 15px 30px;
   text-align: center;
@@ -295,14 +252,13 @@ ul li {
 }
 
 .Pricing_sec .submit_btn:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-color);
 }
 
-/* Footer Section Styles */
 .Footer_sec {
-  background: #007bff;
-  color: #fff;
-  padding: 60px 20px;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 30px 20px;
   margin-top: 40px;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -318,20 +274,13 @@ ul li {
 }
 
 .footerside h3 {
-  font-size: 28px;
-  margin-bottom: 20px;
-  color: #fff;
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: var(--text-color);
 }
 
 .footerside p {
-  font-size: 16px;
-  line-height: 1.8;
-  color: #fff;
-}
-
-@media screen and (max-width: 768px) {
-  .leftside,
-  .rightside {
-    width: 100%;
-  }
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-color);
 }

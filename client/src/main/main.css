@@ -1,99 +1,69 @@
-/* main.css */
+:root {
+  --primary-color: #FFA500;
+  --secondary-color: #333;
+  --background-color: #f0f0f0;
+  --text-color: #fff;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-/* Base styles */
 .container {
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  max-width: 1200px;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.col {
-  flex: 0 0 calc(100% / 5 - 20px); /* Adjust column width */
-  margin-bottom: 20px;
 }
 
 .heroBox {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 16px;
+  background-color: var(--text-color);
+  border-radius: 10px;
+  padding: 10px;
+  height: 150px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  height: 160px; /* Adjust box height */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.ele {
-  color: #333;
+.heroBox:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .boxIcons {
   color: #f43f08;
+  margin-right: 15px;
 }
 
-/* Image scrolling section */
-#scrollingImg {
+.image-section {
   display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  margin-top: 20px;
+  justify-content: space-around;
+  overflow: hidden;
 }
 
-#scrollingImg > div {
-  flex: 0 0 auto;
-  scroll-snap-align: center;
-}
-
-#scrollingImg img {
-  width: 320px; /* Set a common width */
-  height: 160px; /* Set a common height */
+.image-section img {
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   border-radius: 8px;
-  margin-right: 10px; /* Adjust spacing between images */
+  transition: transform 0.3s ease;
 }
 
-/* Main content sections */
-.container-md {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+.image-section img:hover {
+  transform: scale(1.05);
 }
 
-.container-md h1 {
-  font-family: 'Permanent Marker', cursive;
-  color: #f43f08;
-  margin-bottom: 15px;
+.login-form-container {
+  margin: 20px auto;
+  max-width: 450px;
 }
 
-.container-md p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #333;
+.hover\:bg-gradient-to-r:hover {
+  background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
 }
 
-/* Hover effects */
-.hover:text-white:hover {
-  color: #ffffff !important;
+.hover\:shadow-lg:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.hover:bg-gradient-to-r:hover {
-  background-image: linear-gradient(to right, #f43f08, #ff4500);
-}
-
-.hover:shadow-lg:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.hover:shadow-orange-300:hover {
-  box-shadow: 0 4px 8px rgba(244, 63, 8, 0.3);
+.hover\:text-white:hover {
+  color: var(--primary-color);
 }

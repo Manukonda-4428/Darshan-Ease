@@ -20,7 +20,6 @@ const UserProfile = () => {
       console.log(err);
     }
   };
-
   useEffect(() => {
     fetchUserInfo();
   }, []);

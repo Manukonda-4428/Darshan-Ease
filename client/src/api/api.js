@@ -1,35 +1,39 @@
 import axios from "axios";
-const API_BASE_URL = 'http://localhost:8080'; 
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080/api/v1';
+
+// Helper function to handle API responses
+const handleResponse = (response) => {
+  if (response.status >= 200 && response.status < 300) {
+    return response.data;
+  } else {
+    throw new Error("Unexpected Error Occurred!");
+  }
+};
+
+// Helper function to handle API errors
+const handleError = (error) => {
+  console.error(error);
+  throw error;
+};
 
 // ************* REGISTER USER **************/
 export const registerUser = async (data) => {
   try {
-    const response = await axios.post("/auth/register", data);
-        
-    if (response.status === 201) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    const response = await axios.post(`${API_BASE_URL}/auth/register`, data);
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
 // ************* LOGIN USER **************/
 export const loginUser = async (data) => {
   try {
-    const response = await axios.post("/auth/login", data);
-
-    if (response.status === 200) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    const response = await axios.post(`${API_BASE_URL}/auth/login`, data);
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
@@ -37,7 +41,7 @@ export const loginUser = async (data) => {
 export const getUserInfo = async () => {
   try {
     const response = await axios.post(
-      "/auth/get-user-info",
+      `${API_BASE_URL}/auth/get-user-info`,
       {},
       {
         headers: {
@@ -45,35 +49,23 @@ export const getUserInfo = async () => {
         },
       }
     );
-
-    if (response.status === 200) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
-// ************* APPLY PANDITH ACCOUNT ******************/
+// ********** APPLY PANDITH ACCOUNT ***********/
 export const applyPandithAccount = async (data) => {
   try {
-   
-    const response = await axios.post("/auth/apply-pandith", data, {
+    const response = await axios.post(`${API_BASE_URL}/auth/apply-pandith`, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    if (response.status === 201) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
@@ -88,66 +80,50 @@ export const markAllNotificationsAsSeen = async (userId) => {
       const resData = await response.data;
       return resData;
     } else {
-      throw new Error("Unexcepted Error Occurred!");
+      throw new Error("Unexpected Error Occurred!");
     }
   } catch (err) {
     throw err;
   }
 };
 
-// ********** DELETE ALL SEEN NOTIFICATIONS **************/
+// ********** DELETE ALL SEEN NOTIFICATIONS ***********/
 export const deleteAllSeenNotifications = async (userId) => {
   try {
-    const response = await axios.post("/auth/delete-all-seen-notifications", {
+    const response = await axios.post(`${API_BASE_URL}/auth/delete-all-seen-notifications`, {
       userId,
     });
-
-    if (response.status === 200) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
 // ********** GET ALL USERS ***********/
 export const getAllUser = async () => {
   try {
-    const response = await axios.get("/admin/getAllUser", {
+    const response = await axios.get(`${API_BASE_URL}/admin/getAllUser`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    if (response.status === 200) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
 // ********** GET ALL PANDITHS ***********/
 export const getAllPandith = async () => {
   try {
-    const response = await axios.get("/admin/getAllPandiths", {
+    const response = await axios.get(`${API_BASE_URL}/admin/getAllPandiths`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    if (response.status === 200) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
@@ -155,7 +131,7 @@ export const getAllPandith = async () => {
 export const changeAccountStatus = async (pandithId, status) => {
   try {
     const response = await axios.post(
-      "/admin/changeAccountStatus",
+      `${API_BASE_URL}/admin/changeAccountStatus`,
       { pandithId, status },
       {
         headers: {
@@ -163,279 +139,213 @@ export const changeAccountStatus = async (pandithId, status) => {
         },
       }
     );
-
-    if (response.status === 201) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
 // ********** GET PANDITH INFO ***********/
 export const getPandithInfo = async (userId) => {
   try {
-    const response = await axios.post("/pandith/get-pandith-info", userId, {
+    const response = await axios.post(`${API_BASE_URL}/pandith/get-pandith-info`, { userId }, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-
-    if (response.status === 200) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
 // ********** PANDITH PROFILE UPDATE ***********/
 export const updatePandithProfile = async (data) => {
   try {
-    const response = await axios.post("/pandith/update-profile", data, {
+    const response = await axios.post(`${API_BASE_URL}/pandith/update-profile`, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-
-    if (response.status === 201) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
 // ********** GET ALL APPROVED PANDITHS ***********/
 export const getAllApprovedPandiths = async () => {
   try {
-    const response = await axios.get("/auth/getAllApprovedPandiths");
-
-    if (response.status === 200) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    const response = await axios.get(`${API_BASE_URL}/auth/getAllApprovedPandiths`);
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
 // ************** GET PANDITH BY ID ****************/
 export const getPandithById = async (pandithId) => {
   try {
-    const response = await axios.post("/pandith/getPandithById", pandithId, {
+    const response = await axios.post(`${API_BASE_URL}/pandith/getPandithById`, { pandithId }, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-
-    if (response.status === 200) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
-//donation form
 
-
+// ********** DONATION FORM ***********/
 export const submitDonation = async (donationData) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/api/v1/auth/donations`, donationData);
-    return response.data;
-  } catch (error) {
-    throw error; // Rethrow the error for handling in the component
+    const response = await axios.post(`${API_BASE_URL}/auth/donations`, donationData);
+    return handleResponse(response);
+  } catch (err) {
+    handleError(err);
   }
 };
 
 export const fetchDonations = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/donations`);
-    return response.data;
-  } catch (error) {
-    throw error;
+    const response = await axios.get(`${API_BASE_URL}/auth/donations`);
+    return handleResponse(response);
+  } catch (err) {
+    handleError(err);
   }
 };
 
 // ************** APPOINTMENT BOOKING ****************/
 export const bookingPooja = async (data) => {
   try {
-    const response = await axios.post("/auth/book-pooja", data, {
+    const response = await axios.post(`${API_BASE_URL}/auth/book-pooja`, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-
-    if (response.status === 200) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
 // ****** CHECK APPOINTMENT IS AVAILABLE OR NOT ******/
 export const bookingAvailability = async (data) => {
   try {
-    const response = await axios.post("/auth/booking-availability", data, {
+    const response = await axios.post(`${API_BASE_URL}/auth/booking-availability`, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-
-    if (response.status === 200) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    return handleResponse(response);
   } catch (err) {
-    console.log(err);
+    handleError(err);
   }
 };
 
 // ****** GET USER APPOINTMENTS ******/
 export const getUserPoojas = async () => {
   try {
-    const response = await axios.get("/auth/user-poojas", {
+    const response = await axios.get(`${API_BASE_URL}/auth/user-poojas`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    if (response.status === 200) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
 // ****** GET PANDITH APPOINTMENTS ******/
 export const getPandithPoojas = async () => {
   try {
-    const response = await axios.get("/pandith/pandith-poojas", {
+    const response = await axios.get(`${API_BASE_URL}/pandith/pandith-poojas`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-
-    if (response.status === 200) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
 // ******* UPDATE ACCOUNT STATUS *******/
 export const updatePoojaStatus = async (data) => {
   try {
-    const response = await axios.post("/pandith/updatePoojaStatus", data, {
+    const response = await axios.post(`${API_BASE_URL}/pandith/updatePoojaStatus`, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-
-    if (response.status === 200) {
-      const resData = await response.data;
-      return resData;
-    } else {
-      throw new Error("Unexcepted Error Occurred!");
-    }
+    return handleResponse(response);
   } catch (err) {
-    throw err;
+    handleError(err);
   }
 };
 
-
+// ********** DHARSHAN ***********/
 export const createDharshan = async (data) => {
   try {
-    const response = await axios.post('/api/dharshan/create', data, {
+    const response = await axios.post(`${API_BASE_URL}/dharshan/create`, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
-    return response.data;
-  } catch (error) {
-    throw error;
+    return handleResponse(response);
+  } catch (err) {
+    handleError(err);
   }
 };
 
-
 export const getDharshan = async () => {
   try {
-    const response = await axios.get('/api/dharshan');
-    return response.data;
+    const response = await axios.get(`${API_BASE_URL}/dharshan`);
+    return handleResponse(response);
   } catch (err) {
-    console.error('Failed to fetch Dharshan data:', err);
-    throw err;
+    handleError(err);
   }
 };
 
 export const updateDharshan = async (id, data) => {
   try {
-    const response = await axios.put(`/api/dharshan/${id}`, data, {
+    const response = await axios.put(`${API_BASE_URL}/dharshan/${id}`, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
-    return response.data;
-  } catch (error) {
-    throw error;
+    return handleResponse(response);
+  } catch (err) {
+    handleError(err);
   }
 };
 
 export const deleteDharshan = async (id) => {
   try {
-    const response = await axios.delete(`/api/dharshan/${id}`, {
+    const response = await axios.delete(`${API_BASE_URL}/dharshan/${id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
-    return response.data;
-  } catch (error) {
-    throw error;
+    return handleResponse(response);
+  } catch (err) {
+    handleError(err);
   }
 };
+
+// ********** BLOCK USER ***********/
 export const blockUser = async (userId) => {
   try {
-    const response = await fetch(`/api/users/${userId}/block`, {
-      method: 'PUT', // Assuming you use PUT method for blocking
+    const response = await axios.put(`${API_BASE_URL}/users/${userId}/block`, {}, {
       headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
         'Content-Type': 'application/json',
-        // Include any necessary headers (e.g., authorization token)
       },
     });
-
-    if (!response.ok) {
-      throw new Error('Failed to block user');
-    }
-
-    return await response.json();
-  } catch (error) {
-    throw new Error(error.message);
+    return handleResponse(response);
+  } catch (err) {
+    handleError(err);
   }
 };

@@ -14,7 +14,7 @@ const ApplyPandith = () => {
 
   const { user } = useSelector((state) => state.user);
 
-  //Form Submit
+  // Form Submit
   const onFinish = async (values) => {
     const userId = user._id;
     const data = { ...values, userId };
@@ -23,30 +23,31 @@ const ApplyPandith = () => {
       dispatch(showLoading());
       await applyPandithAccount(data);
       dispatch(hideLoading());
-      toast.success("pooja has applied successfully!");
+      toast.success("Pooja has been applied successfully!");
       navigate("/");
     } catch (err) {
       dispatch(hideLoading());
-      toast.error(err.response.data.message);
+      toast.error("Failed to apply for Pooja Pandith. Please try again.");
     }
   };
 
   return (
-    <>
-      <Layout>
-        <h1 className="mb-1 montserrat d-flex justify-content-center">
-          Apply For pooja pandith
-        </h1>
+    <Layout>
+      <div className="container">
+        <h1 className="text-center mb-3">Apply For Pooja Pandith</h1>
         <hr />
         <Form name="pandith-form" layout="vertical" onFinish={onFinish}>
-          <h3 className="mb-2 text-secondary">Personal Information:</h3>
-          <Row gutter={10}>
+          <h3 className="mb-1 text-secondary">Personal Information:</h3>
+          <Row gutter={16}>
             <Col span={8} xs={24} sm={24} lg={8}>
               <Form.Item
                 label="First Name"
                 name="firstName"
                 rules={[
-                  { required: true, message: "Please enter your first name!" },
+                  {
+                    required: true,
+                    message: "Please enter your first name!",
+                  },
                   {
                     min: 2,
                     message: "First name must be at least 2 characters long!",
@@ -66,7 +67,10 @@ const ApplyPandith = () => {
                 label="Last Name"
                 name="lastName"
                 rules={[
-                  { required: true, message: "Please enter your last name!" },
+                  {
+                    required: true,
+                    message: "Please enter your last name!",
+                  },
                   {
                     min: 2,
                     message: "Last name must be at least 2 characters long!",
@@ -111,7 +115,7 @@ const ApplyPandith = () => {
                   },
                 ]}
               >
-                <Input type="url" placeholder="Enter Website url" />
+                <Input type="url" placeholder="Enter Website URL" />
               </Form.Item>
             </Col>
 
@@ -130,7 +134,7 @@ const ApplyPandith = () => {
                   },
                 ]}
               >
-                <Input.TextArea placeholder="Enter Addres" rows={1} />
+                <Input.TextArea placeholder="Enter Address" rows={1} />
               </Form.Item>
             </Col>
           </Row>
@@ -185,10 +189,7 @@ const ApplyPandith = () => {
                   },
                 ]}
               >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  placeholder="Enter experience"
-                />
+                <InputNumber style={{ width: "100%" }} placeholder="Enter experience" />
               </Form.Item>
             </Col>
 
@@ -199,7 +200,7 @@ const ApplyPandith = () => {
                 rules={[
                   {
                     required: true,
-                    message: "Please enter your experience in years!",
+                    message: "Please enter your fee per consultation!",
                   },
                   {
                     type: "number",
@@ -209,11 +210,7 @@ const ApplyPandith = () => {
                   },
                 ]}
               >
-                <InputNumber
-                  style={{ width: "100%" }}
-                  prefix="₹"
-                  placeholder="Enter fee per consultation"
-                />
+                <InputNumber style={{ width: "100%" }} prefix="₹" placeholder="Enter fee per consultation" />
               </Form.Item>
             </Col>
 
@@ -236,13 +233,13 @@ const ApplyPandith = () => {
           <div className="d-flex justify-content-end">
             <Form.Item>
               <Button type="primary" htmlType="submit">
-                Apply pooja pandith
+                Apply Pooja Pandith
               </Button>
             </Form.Item>
           </div>
         </Form>
-      </Layout>
-    </>
+      </div>
+    </Layout>
   );
 };
 

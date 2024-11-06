@@ -27,59 +27,45 @@ const DonationForm = () => {
 
   return (
     <Layout>
-    <Form name="donation-form" layout="vertical" onFinish={onFinish} className="donation-form">
-      <h3 className="mb-2 text-secondary">Donation Information:</h3>
-      <Row gutter={16}>
-        <Col span={12} xs={24} sm={24} lg={12}>
-          <Form.Item
-            label="Name"
-            name="name"
-            rules={[{ required: true, message: "Please enter your name!" }]}
-          >
-            <Input placeholder="Enter your name" />
-          </Form.Item>
-        </Col>
-
-        <Col span={12} xs={24} sm={24} lg={12}>
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              { required: true, message: "Please enter your email!" },
-              { type: "email", message: "Please enter a valid email!" },
-            ]}
-          >
-            <Input type="email" placeholder="Enter your email" />
-          </Form.Item>
-        </Col>
-
-        <Col span={12} xs={24} sm={24} lg={12}>
-          <Form.Item
-            label="Amount"
-            name="amount"
-            rules={[{ required: true, message: "Please enter the amount!" }]}
-          >
-            <Input type="number" placeholder="Enter donation amount" />
-          </Form.Item>
-        </Col>
-
-        <Col span={12} xs={24} sm={24} lg={12}>
-          <Form.Item
-            label="Message"
-            name="message"
-            rules={[{ required: false }]}
-          >
-            <Input.TextArea placeholder="Enter your message" rows={4} />
-          </Form.Item>
-        </Col>
-      </Row>
-
-      <div className="text-center mt-4">
-        <Button type="primary" htmlType="submit">
-          Submit Donation
-        </Button>
-      </div>
-    </Form>
+      <Form name="donation-form" layout="vertical" onFinish={onFinish} className="donation-form">
+        <h3 className="mb-2 text-secondary">Donation Information:</h3>
+        <Row gutter={16}>
+          <Col span={12}>
+            <Form.Item
+              label="Name"
+              name="name"
+              rules={[{ required: true, message: "Please enter your name!" }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[{ required: true, message: "Please enter your email!" }]}
+            >
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Form.Item
+          label="Amount"
+          name="amount"
+          rules={[{ required: true, message: "Please enter the donation amount!" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Message"
+          name="message"
+        >
+          <Input.TextArea rows={4} />
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">Submit</Button>
+        </Form.Item>
+      </Form>
     </Layout>
   );
 };
