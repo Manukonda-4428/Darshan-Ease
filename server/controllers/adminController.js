@@ -68,8 +68,8 @@ export const changeAccountStatus = async (req, res) => {
       message: `Your pandith account request has ${status}.`,
       onclickPath: "/notifications",
     });
-    user.isPandith = status === "approved" ? true : false;
-    user.save();
+    user.isPandith = status === "approved";
+    await user.save();
 
     //Success res
     return res.status(201).json({

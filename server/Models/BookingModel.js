@@ -1,40 +1,34 @@
 import mongoose from "mongoose";
 
-const bookingSchema = new mongoose.Schema(
-  {
-    userId: {
-      type: String,
-      required: true,
-    },
-    pandithId: {
-      type: String,
-      required: true,
-    },
-    pandithInfo: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "Pandith",
-    },
-    userInfo: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "User",
-    },
-    date: {
-      type: String,
-      required: true,
-    },
-    status: {
-      type: String,
-      required: true,
-      default: "pending",
-    },
-    time: {
-      type: String,
-      required: true,
-    },
+const bookingSchema = new mongoose.Schema({
+  pandithName: {
+    type: String,
+    required: true,
   },
-  { timestamps: true }
-);
+  date: {
+    type: Date,
+    required: true,
+  },
+  time: {
+    type: Date,
+    required: true,
+  },
+  status: {
+    type: String,
+    default: "scheduled",
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  pandithId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Pandith",
+    required: true,
+  },
+});
 
-export default mongoose.model("Booking", bookingSchema);
+const BookingModel = mongoose.model("Booking", bookingSchema);
+
+export default BookingModel;

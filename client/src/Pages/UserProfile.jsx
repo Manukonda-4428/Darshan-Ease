@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../redux/spinnerSlice";
 import { getUserInfo } from "../api/api";
 import { Card, Descriptions, List } from "antd";
+import "./UserProfile.css";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const UserProfile = () => {
     try {
       dispatch(showLoading());
       const res = await getUserInfo();
+      console.log(res.data); // Log the data
       setUser(res.data);
       dispatch(hideLoading());
     } catch (err) {

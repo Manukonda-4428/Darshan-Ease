@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import "./LoginPage.css"; // Import the CSS file
 
+
 const LoginPage = () => {
   const navigate = useNavigate();
 
@@ -14,7 +15,7 @@ const LoginPage = () => {
       if (response.data.success) {
         localStorage.setItem("token", response.data.token);
         toast.success("Login successful!");
-        navigate("/");
+        navigate("/"); // Navigate to the homepage
       } else {
         toast.error(response.data.message);
       }

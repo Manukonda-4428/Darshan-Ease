@@ -17,20 +17,25 @@ const handleError = (error) => {
   throw error;
 };
 
+// ************* LOGIN USER **************/
+export const login = async (data) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/auth/login`, data);
+    if (response.data.success) {
+      localStorage.setItem("token", response.data.token);
+      return response.data;
+    } else {
+      throw new Error(response.data.message);
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
 // ************* REGISTER USER **************/
 export const registerUser = async (data) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/auth/register`, data);
-    return handleResponse(response);
-  } catch (err) {
-    handleError(err);
-  }
-};
-
-// ************* LOGIN USER **************/
-export const loginUser = async (data) => {
-  try {
-    const response = await axios.post(`${API_BASE_URL}/auth/login`, data);
     return handleResponse(response);
   } catch (err) {
     handleError(err);
@@ -289,7 +294,7 @@ export const updatePoojaStatus = async (data) => {
 // ********** DHARSHAN ***********/
 export const createDharshan = async (data) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/dharshan/create`, data, {
+    const response = await axios.post(`${API_BASE_URL}/dharshan`, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
@@ -342,6 +347,20 @@ export const blockUser = async (userId) => {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         'Content-Type': 'application/json',
+      },
+    });
+    return handleResponse(response);
+  } catch (err) {
+    handleError(err);
+  }
+};
+
+// Add a new function to handle scheduling poojas
+export const schedulePooja = async (data) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/auth/schedule-pooja`, data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
     return handleResponse(response);

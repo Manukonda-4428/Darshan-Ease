@@ -1,26 +1,16 @@
 import jwt from "jsonwebtoken";
+import UserModel from "../Models/UserModel.js";
 
-const authMiddleware = async (req, res, next) => {
+export const authMiddleware = async (req, res, next) => {
   try {
-    const token = req.headers["authorization"].split(" ")[1];
-
-    jwt.verify(token, process.env.JWT_SECRET, (err, decode) => {
-      if (err) {
-        return res.status(401).json({
-          message: "Auth Failed!",
-          success: false,
-        });
-      } else {
-        req.body.userId = decode.id;
-        next();
-      }
-    });
+    const token = req.headers.authorization.split(" ")[1];
+    if (!token) {
+      return res.status(401).json({ message: "Auth failed!" });
+    }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await UserModel.findById(decoded.id);
+    next();
   } catch (err) {
-    return res.status(401).json({
-      message: "Auth Failed!",
-      success: false,
-    });
+    return res.status(401).json({ message: "Auth failed!" });
   }
 };
-
-export { authMiddleware };

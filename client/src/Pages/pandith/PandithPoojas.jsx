@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { hideLoading, showLoading } from "../../redux/spinnerSlice";
 import { getPandithPoojas, updatePoojaStatus } from "../../api/api";
 import moment from "moment";
-import { Table, Button } from "antd"; // Add Button here
+import { Table, Button, Card } from "antd"; // Add Card here
 import toast from "react-hot-toast";
 
 const PandithPoojas = () => {
@@ -30,64 +30,60 @@ const PandithPoojas = () => {
   }, []);
 
   // Handle Pooja Booking Status
-  const handlePoojaStatus = async (record, status) => {
+  const handleStatusChange = async (record, status) => {
     try {
       dispatch(showLoading());
-      const res = await updatePoojaStatus({ poojasId: record._id, status });
-      toast.success(res.message);
+      await updatePoojaStatus({ poojasId: record._id, status });
       fetchPandithPoojas();
+      dispatch(hideLoading());
+      toast.success("Pooja status updated successfully!");
     } catch (err) {
       dispatch(hideLoading());
       toast.error("Failed to update pooja status. Please try again later.");
+      console.error(err);
     }
   };
 
-  // Columns for the table
   const columns = [
     {
-      title: "User Name",
-      dataIndex: "userInfo",
-      render: (text, record) => `${record.userInfo.firstName} ${record.userInfo.lastName}`,
+      title: "Pooja Name",
+      dataIndex: "poojaName",
+      key: "poojaName",
     },
     {
       title: "Date",
       dataIndex: "date",
+      key: "date",
       render: (text) => moment(text).format("DD-MM-YYYY"),
     },
     {
       title: "Time",
       dataIndex: "time",
-      render: (text) => moment(text).format("HH:mm"),
+      key: "time",
     },
     {
       title: "Status",
       dataIndex: "status",
-    },
-    {
-      title: "Actions",
-      dataIndex: "actions",
+      key: "status",
       render: (text, record) => (
-        <div className="d-flex">
+        <span>
+          {text}{" "}
           <Button
-            type="primary"
-            onClick={() => handlePoojaStatus(record, "approved")}
+            type="link"
+            onClick={() => handleStatusChange(record, text === "pending" ? "approved" : "pending")}
           >
-            Approve
+            {text === "pending" ? "Approve" : "Revert"}
           </Button>
-          <Button
-            type="danger"
-            onClick={() => handlePoojaStatus(record, "rejected")}
-          >
-            Reject
-          </Button>
-        </div>
+        </span>
       ),
     },
   ];
 
   return (
     <Layout>
-      <Table dataSource={poojas} columns={columns} />
+      <Card title="Pandith Poojas" className="container">
+        <Table dataSource={poojas} columns={columns} rowKey="_id" />
+      </Card>
     </Layout>
   );
 };

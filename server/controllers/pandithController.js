@@ -31,10 +31,9 @@ export const getPandithInfo = async (req, res) => {
 export const updatePandithProfile = async (req, res) => {
   try {
     const pandith = await PandithModel.findOneAndUpdate(
-      {
-        userId: req.body.userId,
-      },
-      req.body
+      { userId: req.body.userId },
+      req.body,
+      { new: true }
     );
     //Validation
     if (!pandith) {
@@ -62,7 +61,7 @@ export const updatePandithProfile = async (req, res) => {
 //************** GET PANDITH BY ID *************/
 export const getPandithById = async (req, res) => {
   try {
-    const pandith = await PandithModel.findOne({ _id: req.body.pandithId });
+    const pandith = await PandithModel.findById(req.body.pandithId);
     //Validation
     if (!pandith) {
       return res.status(404).json({
@@ -74,7 +73,7 @@ export const getPandithById = async (req, res) => {
     //success
     return res.status(200).json({
       success: true,
-      message: "Pandith get by id successfully!",
+      message: "Pandith fetched successfully!",
       data: pandith,
     });
   } catch (err) {

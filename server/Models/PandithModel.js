@@ -5,13 +5,12 @@ const pandithSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   phoneNumber: { type: Number, required: true },
-  website: { type: String, required: false },
   address: { type: String, required: true },
   department: { type: String, required: true },
   specialization: { type: String, required: true },
-  experience: { type: String, required: true },
+  experience: { type: Number, required: true },
   feePerConsultation: { type: Number, required: true },
-  timings: { type: Array, required: true },
+  timings: { type: [String], required: true },
   status: { type: String, default: "pending" },
 }, { timestamps: true });
 

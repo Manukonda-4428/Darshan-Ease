@@ -6,17 +6,10 @@ import {
   changeAccountStatus,
 } from "../controllers/adminController.js";
 
-//Router Obj
 const router = express.Router();
 
-//Get all user
 router.get("/getAllUser", authMiddleware, getAllUser);
-
-//Get all Pandiths
 router.get("/getAllPandiths", authMiddleware, getAllPandith);
-
-//Account Status Change
 router.post("/changeAccountStatus", authMiddleware, changeAccountStatus);
 
-//Export
 export default router;

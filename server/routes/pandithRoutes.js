@@ -13,7 +13,7 @@ const router = express.Router();
 router.post('/get-pandith-info', authMiddleware, getPandithInfo);
 router.post('/update-profile', authMiddleware, updatePandithProfile);
 router.post('/getPandithById', authMiddleware, getPandithById);
-router.get('/pandith-poojas', authMiddleware, getPandithPoojas);
+router.get('/pandith-poojas', authMiddleware, getPandithPoojas); // Ensure this route is correct
 router.post('/updatePoojaStatus', authMiddleware, updatePoojaStatus);
 
 export default router;
