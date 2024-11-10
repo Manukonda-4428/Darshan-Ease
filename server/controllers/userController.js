@@ -100,6 +100,23 @@ export const login = async (req, res, next) => {
   }
 };
 
+// Define the schedulePooja function
+export const schedulePooja = async (req, res) => {
+  try {
+    // Your logic for scheduling a pooja
+    return res.status(200).json({
+      success: true,
+      message: "Pooja scheduled successfully!",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: "Internal Server Error!",
+      success: false,
+      error: err.message,
+    });
+  }
+};
+
 //********* GET USER INFO (FOR PROTECTED ROUTES) ******/
 export const getUserInfo = async (req, res, next) => {
   try {
