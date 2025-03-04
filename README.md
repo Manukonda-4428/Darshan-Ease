@@ -1,6 +1,6 @@
-# Temple Management System
+# Darshan Ease:Your Effortless path to Divine Sight 
 
-This project is a Temple Management System built using the MERN stack (MongoDB, Express, React, Node.js). It allows users to book poojas, manage profiles, and make donations.
+This project is a Darshan Ease: Your Effortless path to Divine Sight is  built using the MERN stack (MongoDB, Express, React, Node.js). It allows users to book poojas, manage profiles, and make donations.
 
 ## Table of Contents
 
